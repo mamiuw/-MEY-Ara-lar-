@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEYTRA | Profesyonel Medya İndirici & Dönüştürücü</title>
+    <title>MEYTRA TOOLS | Video Araçları ve Medya Dönüştürücü</title>
+    <meta name="description" content="Instagram, YouTube, TikTok videolarını indirin; ses, video ve görsellerinizi saniyeler içinde dilediğiniz formata dönüştürün.">
+    <meta name="keywords" content="meytra tools, video dönüştürücü, mp3 çevirici, medya indirici, online araçlar">
+    <meta name="author" content="Muhammed Emin Yılmaz">
+    
+    <!-- Google Search Console Doğrulama Kodu -->
+    <meta name="google-site-verification" content="xDvzdWKXoCmrmkxEIByJXh19pVr-FLEni52NWkkzu7g" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -231,7 +238,7 @@
     </footer>
 
     <script>
-        let currentAppMode = 'download'; // 'download' veya 'convert'
+        let currentAppMode = 'download'; 
         let currentPlatform = 'instagram';
 
         function setAppMode(mode) {
@@ -330,7 +337,6 @@
             }
         }
 
-        // Format Dönüştürme Mantığı (Client-side simülasyonu / Canvas & Blob tabanlı)
         async function startConversion() {
             const fileInput = document.getElementById('fileInput');
             const targetFormat = document.getElementById('targetFormat').value;
@@ -350,7 +356,6 @@
             resultActions.innerHTML = '';
 
             setTimeout(() => {
-                // Eğer görsel ise Canvas ile format değiştirme simülasyonu/dönüştürmesi
                 if(file.type.startsWith('image/') && ['png', 'jpg', 'webp'].includes(targetFormat)) {
                     const reader = new FileReader();
                     reader.onload = function(event) {
@@ -378,7 +383,6 @@
                     }
                     reader.readAsDataURL(file);
                 } else {
-                    // Video veya ses format değişimleri için genel paketleme simülasyonu
                     const fakeBlob = new Blob([file], { type: file.type });
                     const newUrl = URL.createObjectURL(fakeBlob);
                     const newFileName = `meytra_converted_output.${targetFormat}`;
@@ -394,7 +398,6 @@
             }, 1200);
         }
 
-        // LocalStorage Geçmiş Sistemi
         function saveToHistory(title, link) {
             let history = JSON.parse(localStorage.getItem('meytra_history') || '[]');
             history.unshift({ title, link, date: new Date().toLocaleTimeString() });
