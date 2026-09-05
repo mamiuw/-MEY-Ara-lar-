@@ -3,240 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEYTRA Suite | Minimal & Profesyonel Araç Paneli</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MEYTRA Suite | Gelişmiş Web Araçları</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #00c6ff;
-            --secondary: #0072ff;
-            --bg-dark: #070a12;
-            --bg-panel: rgba(13, 19, 33, 0.9);
-            --bg-card: rgba(18, 27, 46, 0.7);
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-green: #10b981;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --bg-main: #0a0b0e;
+            --bg-card: #12151c;
+            --bg-input: #1a1e29;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: #222634;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
-        body { background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* Üst Header ve Açılır/Dallanan Menü */
-        header { background: var(--bg-panel); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        
-        .logo { font-size: 20px; font-weight: 700; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        .logo span { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* Üst Header ve Açılır Sorgu Paneli Menüsü */
+        header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 5%; position: sticky; top: 0; z-index: 1000; }
+        .nav-wrap { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 75px; }
+        .logo { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent); }
 
-        .dropdown-menu { display: flex; gap: 10px; align-items: center; list-style: none; }
+        .nav-menu { display: flex; gap: 15px; list-style: none; align-items: center; }
         .dropdown { position: relative; }
-        .drop-btn { background: transparent; border: none; color: var(--text-muted); padding: 10px 15px; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 8px; transition: 0.3s; display: flex; align-items: center; gap: 6px; }
-        .drop-btn:hover, .drop-btn.active { color: #fff; background: rgba(255,255,255,0.05); }
+        .drop-btn { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); padding: 10px 18px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .drop-btn:hover { border-color: var(--accent); }
 
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: #0f172a; min-width: 220px; border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); padding: 8px; z-index: 1100; animation: fadeIn 0.2s ease; }
+        .dropdown-content { display: none; position: absolute; top: calc(100% + 8px); left: 0; background: var(--bg-card); border: 1px solid var(--border); min-width: 240px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); padding: 8px; z-index: 1100; }
         .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { color: var(--text-muted); padding: 10px 14px; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 13px; border-radius: 6px; transition: 0.2s; cursor: pointer; }
+        .dropdown-content a:hover { background: var(--bg-input); color: #fff; }
+
+        /* Ana İçerik / Grid Yapısı */
+        .container { max-width: 1400px; margin: 40px auto; padding: 0 20px; width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; flex: 1; }
         
-        .dropdown-content a { color: var(--text-muted); padding: 10px 14px; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 13px; border-radius: 8px; transition: 0.2s; cursor: pointer; }
-        .dropdown-content a:hover { background: rgba(0, 198, 255, 0.1); color: #fff; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; }
+        .card:hover { border-color: rgba(59, 130, 246, 0.4); }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .card-header i { font-size: 20px; color: var(--accent); background: var(--bg-input); padding: 12px; border-radius: 10px; }
+        .card-header h3 { font-size: 16px; font-weight: 600; color: #fff; }
+        .card-header p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
-        /* Ana İçerik Alanı */
-        .main-content { max-width: 1000px; margin: 120px auto 60px; padding: 0 20px; width: 100%; flex: 1; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
         
-        .tool-panel { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px; display: none; animation: fadeIn 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .tool-panel.active { display: block; }
+        input[type="text"], input[type="file"], select { width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; color: #fff; font-size: 13px; outline: none; transition: 0.2s; }
+        input[type="text"]:focus, select:focus { border-color: var(--accent); }
+
+        .btn { width: 100%; padding: 12px; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn:hover { background: var(--accent-hover); }
+
+        .result-box { margin-top: 15px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 12px; word-break: break-all; display: none; }
         
-        .panel-header { margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
-        .panel-header h2 { font-size: 22px; color: #fff; margin-bottom: 5px; }
-        .panel-header p { font-size: 13px; color: var(--text-muted); }
-
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.5px; }
-        
-        .custom-input, .custom-select { width: 100%; padding: 14px; background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-color); border-radius: 10px; color: #fff; font-size: 14px; outline: none; transition: 0.3s; }
-        .custom-input:focus, .custom-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.15); }
-        .custom-select option { background: var(--bg-dark); }
-
-        .file-drop { border: 2px dashed rgba(255,255,255,0.12); border-radius: 12px; padding: 30px; text-align: center; cursor: pointer; background: rgba(9, 13, 22, 0.4); transition: 0.3s; margin-bottom: 20px; }
-        .file-drop:hover { border-color: var(--primary); }
-        .file-drop i { font-size: 32px; color: var(--primary); margin-bottom: 10px; }
-        .file-drop p { font-size: 13px; color: var(--text-muted); }
-
-        .action-btn { width: 100%; padding: 14px; border: none; border-radius: 10px; background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .action-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .result-box { margin-top: 20px; background: rgba(9, 13, 22, 0.9); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; display: none; text-align: center; }
-        .result-box h4 { font-size: 14px; margin-bottom: 12px; color: #fff; }
-        .result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .result-actions a { padding: 10px 18px; background: var(--accent-green); color: #fff; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-        footer { text-align: center; padding: 20px; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border-color); }
+        footer { text-align: center; padding: 20px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--bg-card); }
 
         @media(max-width: 768px) {
-            .dropdown-menu { display: none; }
+            .nav-menu { display: none; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="nav-container">
-            <div class="logo" onclick="openTool('home')">
-                <i class="fa-solid fa-terminal" style="color: var(--primary);"></i> MEYTRA<span>Panel</span>
+        <div class="nav-wrap">
+            <div class="logo">
+                <i class="fa-solid fa-layer-group"></i> MEYTRA Suite
             </div>
-            <ul class="dropdown-menu">
-                <!-- 1. Dallanan Menü: İndirme İşlemleri -->
+            <ul class="nav-menu">
+                <!-- Sorgu Paneli Tarzı Üst Açılır Menüler -->
                 <li class="dropdown">
                     <button class="drop-btn"><i class="fa-solid fa-download"></i> İndirme İşlemleri <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></button>
                     <div class="dropdown-content">
-                        <a onclick="openTool('mediaDownloader')"><i class="fa-solid fa-cloud-arrow-down"></i> Sosyal Medya İndirici</a>
+                        <a href="#download-section"><i class="fa-solid fa-video"></i> Medya İndirici</a>
                     </div>
                 </li>
-                <!-- 2. Dallanan Menü: Format Dönüştürme -->
                 <li class="dropdown">
                     <button class="drop-btn"><i class="fa-solid fa-rotate"></i> Format Dönüştürme <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></button>
                     <div class="dropdown-content">
-                        <a onclick="openTool('fileConverter')"><i class="fa-solid fa-image"></i> Görsel Format Çevirici</a>
+                        <a href="#convert-section"><i class="fa-solid fa-image"></i> Görsel Format Çevirici</a>
                     </div>
                 </li>
-                <!-- 3. Dallanan Menü: Güvenlik & Araçlar -->
                 <li class="dropdown">
-                    <button class="drop-btn"><i class="fa-solid fa-toolbox"></i> Geliştirici & Araçlar <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></button>
+                    <button class="drop-btn"><i class="fa-solid fa-toolbox"></i> Diğer Araçlar <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></button>
                     <div class="dropdown-content">
-                        <a onclick="openTool('passwordGen')"><i class="fa-solid fa-key"></i> Güvenli Şifre Üretici</a>
-                        <a onclick="openTool('uuidGen')"><i class="fa-solid fa-fingerprint"></i> UUID v4 Üretici</a>
-                        <a onclick="openTool('textCase')"><i class="fa-solid fa-font"></i> Metin Dönüştürücü</a>
+                        <a href="#hash-section"><i class="fa-solid fa-fingerprint"></i> UUID Üretici</a>
+                        <a href="#pass-section"><i class="fa-solid fa-key"></i> Şifre Oluşturucu</a>
                     </div>
                 </li>
             </ul>
         </div>
     </header>
 
-    <div class="main-content">
+    <div class="container">
 
-        <!-- ANASAYFA / KARŞILAMA -->
-        <div id="homePanel" class="tool-panel active">
-            <div class="panel-header" style="border:none; text-align:center; padding: 20px 0;">
-                <h2 style="font-size: 28px; margin-bottom: 12px;">Sadeleştirilmiş <span>Kontrol Paneli</span></h2>
-                <p style="max-width: 500px; margin: 0 auto;">Karmaşık yapılar kaldırıldı. Üstteki açılır menülerden dilediğin kategoriyi seçerek işlemlerini hızlıca yapabilirsin kanka.</p>
+        <!-- 1. Medya İndirici -->
+        <div class="card" id="download-section">
+            <div>
+                <div class="card-header">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                    <div>
+                        <h3>Medya İndirici</h3>
+                        <p>Sosyal medya bağlantılarını indir</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Bağlantı (URL)</label>
+                    <input type="text" id="mediaUrl" placeholder="https://...">
+                </div>
+            </div>
+            <div>
+                <button class="btn" onclick="runDownload()"><i class="fa-solid fa-bolt"></i> İndirmeyi Başlat</button>
+                <div class="result-box" id="mediaResult"></div>
             </div>
         </div>
 
-        <!-- 1. SOSYAL MEDYA İNDİRİCİ -->
-        <div id="mediaDownloaderPanel" class="tool-panel">
-            <div class="panel-header">
-                <h2>Sosyal Medya İndirici</h2>
-                <p>Instagram, TikTok, YouTube ve Spotify bağlantılarını analiz edip indir.</p>
+        <!-- 2. Format Dönüştürme -->
+        <div class="card" id="convert-section">
+            <div>
+                <div class="card-header">
+                    <i class="fa-solid fa-rotate"></i>
+                    <div>
+                        <h3>Format Dönüştürücü</h3>
+                        <p>Görsel formatlarını dönüştür</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Görsel Seç</label>
+                    <input type="file" id="imageFile" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Hedef Format</label>
+                    <select id="targetFormat">
+                        <option value="image/jpeg">JPG / JPEG</option>
+                        <option value="image/png">PNG</option>
+                        <option value="image/webp">WEBP</option>
+                    </select>
+                </div>
             </div>
-            <div class="input-group">
-                <label>Medya Bağlantısı (URL)</label>
-                <input type="text" class="custom-input" id="mediaUrl" placeholder="https://...">
-            </div>
-            <button class="action-btn" onclick="runMediaDownload()"><i class="fa-solid fa-bolt"></i> İşlemi Başlat</button>
-            <div class="result-box" id="mediaResult">
-                <h4 id="mediaTitle">Medya Hazır</h4>
-                <div class="result-actions" id="mediaActions"></div>
-            </div>
-        </div>
-
-        <!-- 2. DOSYA & GÖRSEL FORMAT DÖNÜŞTÜRÜCÜ -->
-        <div id="fileConverterPanel" class="tool-panel">
-            <div class="panel-header">
-                <h2>Görsel Format Dönüştürücü</h2>
-                <p>PNG, JPG ve WEBP formatları arasında anında dönüşüm yap.</p>
-            </div>
-            <div class="file-drop" onclick="document.getElementById('convFile').click()">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <p id="fileNameDisplay">Dosya seçmek için tıkla veya sürükle</p>
-                <input type="file" id="convFile" style="display:none;" accept="image/*" onchange="fileSelected(this)">
-            </div>
-            <div class="input-group">
-                <label>Hedef Format</label>
-                <select class="custom-select" id="targetFormat">
-                    <option value="image/jpeg">JPG / JPEG</option>
-                    <option value="image/png">PNG</option>
-                    <option value="image/webp">WEBP</option>
-                </select>
-            </div>
-            <button class="action-btn" onclick="runConversion()"><i class="fa-solid fa-rotate"></i> Formatı Dönüştür</button>
-            <div class="result-box" id="convResult">
-                <h4>Dönüştürme Tamamlandı</h4>
-                <div class="result-actions" id="convActions"></div>
+            <div>
+                <button class="btn" onclick="runConvert()"><i class="fa-solid fa-sync"></i> Formatı Dönüştür</button>
+                <div class="result-box" id="convertResult"></div>
             </div>
         </div>
 
-        <!-- 3. ŞİFRE ÜRETİCİ -->
-        <div id="passwordGenPanel" class="tool-panel">
-            <div class="panel-header">
-                <h2>Güvenli Şifre Üretici</h2>
-                <p>Kırılması zor güçlü parolalar oluşturun.</p>
+        <!-- 3. UUID Üretici -->
+        <div class="card" id="hash-section">
+            <div>
+                <div class="card-header">
+                    <i class="fa-solid fa-fingerprint"></i>
+                    <div>
+                        <h3>UUID v4 Üretici</h3>
+                        <p>Benzersiz kimlik oluştur</p>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Projeleriniz için anında benzersiz UUID v4 anahtarları üretin.</p>
             </div>
-            <div class="input-group">
-                <label>Şifre Uzunluğu</label>
-                <input type="number" class="custom-input" id="passLength" value="16" min="6" max="32">
-            </div>
-            <button class="action-btn" onclick="runPasswordGen()"><i class="fa-solid fa-key"></i> Şifre Üret</button>
-            <div class="result-box" id="passResult">
-                <h4>Üretilen Şifre</h4>
-                <p id="passText" style="color:var(--primary); font-family:monospace; font-size:16px; margin-bottom:10px;"></p>
-            </div>
-        </div>
-
-        <!-- 4. UUID ÜRETİCİ -->
-        <div id="uuidGenPanel" class="tool-panel">
-            <div class="panel-header">
-                <h2>UUID v4 Üretici</h2>
-                <p>Yazılım projeleriniz için eşsiz kimlikler oluşturun.</p>
-            </div>
-            <button class="action-btn" onclick="runUuidGen()"><i class="fa-solid fa-fingerprint"></i> UUID Oluştur</button>
-            <div class="result-box" id="uuidResult">
-                <h4>Üretilen UUID</h4>
-                <p id="uuidText" style="color:var(--primary); font-family:monospace; font-size:15px;"></p>
+            <div>
+                <button class="btn" onclick="runUuid()"><i class="fa-solid fa-plus"></i> UUID Oluştur</button>
+                <div class="result-box" id="uuidResult" style="font-family: monospace; color: var(--accent);"></div>
             </div>
         </div>
 
-        <!-- 5. METİN DÖNÜŞTÜRÜCÜ -->
-        <div id="textCasePanel" class="tool-panel">
-            <div class="panel-header">
-                <h2>Metin Büyük/Küçük Dönüştürücü</h2>
-                <p>Metinleri büyük veya küçük harfe çevirin.</p>
+        <!-- 4. Şifre Üretici -->
+        <div class="card" id="pass-section">
+            <div>
+                <div class="card-header">
+                    <i class="fa-solid fa-key"></i>
+                    <div>
+                        <h3>Şifre Üretici</h3>
+                        <p>Güvenli parolalar yarat</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Karakter Uzunluğu</label>
+                    <input type="text" id="passLen" value="16">
+                </div>
             </div>
-            <div class="input-group">
-                <label>Metin</label>
-                <input type="text" class="custom-input" id="textInput" placeholder="Metin girin...">
-            </div>
-            <button class="action-btn" onclick="runTextCase()"><i class="fa-solid fa-font"></i> Dönüştür</button>
-            <div class="result-box" id="textResult">
-                <h4>Sonuçlar</h4>
-                <p id="textOutput" style="font-size:14px; color:var(--text-muted);"></p>
+            <div>
+                <button class="btn" onclick="runPass()"><i class="fa-solid fa-shield-halved"></i> Şifre Üret</button>
+                <div class="result-box" id="passResult" style="font-family: monospace; color: var(--accent);"></div>
             </div>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 MEYTRA Suite. Sadeleştirilmiş Panel Altyapısı.</p>
+        <p>&copy; 2026 MEYTRA Suite. Tüm hakları saklıdır.</p>
     </footer>
 
     <script>
-        function openTool(panelId) {
-            document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById(panelId + 'Panel').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Media Downloader Fonksiyonu
-        async function runMediaDownload() {
+        // Medya İndirici Simülasyonu / API Entegrasyonu
+        async function runDownload() {
             const url = document.getElementById('mediaUrl').value.trim();
-            if(!url) return alert("Lütfen URL gir kanka!");
             const resBox = document.getElementById('mediaResult');
-            const actions = document.getElementById('mediaActions');
+            if(!url) { alert("Lütfen bir URL girin kanka!"); return; }
             resBox.style.display = 'block';
-            actions.innerHTML = '<span style="color:var(--text-muted)">İşleniyor...</span>';
-
+            resBox.innerHTML = "İşleniyor...";
+            
             try {
                 const response = await fetch('https://social-download-all-in-one.p.rapidapi.com/v1/social/autolink', {
                     method: 'POST',
@@ -250,30 +216,25 @@
                 const res = await response.json();
                 let dl = res.medias?.[0]?.url || res.video || res.url;
                 if(dl) {
-                    actions.innerHTML = `<a href="${dl}" target="_blank" download><i class="fa-solid fa-download"></i> Dosyayı İndir</a>`;
+                    resBox.innerHTML = `<a href="${dl}" target="_blank" style="color:var(--accent); text-decoration:none;"><i class="fa-solid fa-download"></i> Dosyayı İndir</a>`;
                 } else {
-                    alert("Medya bulunamadı!");
-                    resBox.style.display = 'none';
+                    resBox.innerHTML = "Medya bulunamadı.";
                 }
             } catch(e) {
-                alert("Bağlantı hatası oluştu!");
-                resBox.style.display = 'none';
+                resBox.innerHTML = "Bağlantı hatası oluştu.";
             }
         }
 
-        // Dosya Seçimi ve Format Dönüştürme
-        let chosenFile = null;
-        function fileSelected(input) {
-            if(input.files && input.files[0]) {
-                chosenFile = input.files[0];
-                document.getElementById('fileNameDisplay').innerText = `Seçilen: ${chosenFile.name}`;
-            }
-        }
-
-        function runConversion() {
-            if(!chosenFile) return alert("Önce görsel seçmelisin kanka!");
+        // Görsel Dönüştürücü
+        function runConvert() {
+            const fileInput = document.getElementById('imageFile');
+            const resBox = document.getElementById('convertResult');
+            if(fileInput.files.length === 0) { alert("Lütfen bir görsel seç kanka!"); return; }
+            
+            const file = fileInput.files[0];
             const mime = document.getElementById('targetFormat').value;
             const reader = new FileReader();
+            
             reader.onload = function(e) {
                 const img = new Image();
                 img.onload = function() {
@@ -283,42 +244,36 @@
                     canvas.getContext('2d').drawImage(img, 0, 0);
                     const dataUrl = canvas.toDataURL(mime, 0.9);
                     const ext = mime.split('/')[1];
-                    const newName = chosenFile.name.substring(0, chosenFile.name.lastIndexOf('.')) + '.' + (ext === 'jpeg' ? 'jpg' : ext);
+                    const newName = file.name.substring(0, file.name.lastIndexOf('.')) + '.' + (ext === 'jpeg' ? 'jpg' : ext);
                     
-                    document.getElementById('convActions').innerHTML = `<a href="${dataUrl}" download="${newName}"><i class="fa-solid fa-download"></i> Çevrilen Dosyayı İndir (${ext.toUpperCase()})</a>`;
-                    document.getElementById('convResult').style.display = 'block';
+                    resBox.style.display = 'block';
+                    resBox.innerHTML = `<a href="${dataUrl}" download="${newName}" style="color:var(--accent); text-decoration:none;"><i class="fa-solid fa-download"></i> Dönüştürülen Dosyayı İndir (${ext.toUpperCase()})</a>`;
                 }
                 img.src = e.target.result;
             }
-            reader.readAsDataURL(chosenFile);
-        }
-
-        // Şifre Üretici
-        function runPasswordGen() {
-            const len = parseInt(document.getElementById('passLength').value) || 16;
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
-            let pass = "";
-            for(let i=0; i<len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-            document.getElementById('passText').innerText = pass;
-            document.getElementById('passResult').style.display = 'block';
+            reader.readAsDataURL(file);
         }
 
         // UUID Üretici
-        function runUuidGen() {
+        function runUuid() {
             let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
                 let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                 return v.toString(16);
             });
-            document.getElementById('uuidText').innerText = uuid;
-            document.getElementById('uuidResult').style.display = 'block';
+            const box = document.getElementById('uuidResult');
+            box.style.display = 'block';
+            box.innerText = uuid;
         }
 
-        // Metin Dönüştürücü
-        function runTextCase() {
-            const val = document.getElementById('textInput').value;
-            if(!val) return alert("Metin gir kanka!");
-            document.getElementById('textOutput').innerText = `Büyük: ${val.toUpperCase()} | Küçük: ${val.toLowerCase()}`;
-            document.getElementById('textResult').style.display = 'block';
+        // Şifre Üretici
+        function runPass() {
+            const len = parseInt(document.getElementById('passLen').value) || 16;
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&!";
+            let pass = "";
+            for(let i=0; i<len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            const box = document.getElementById('passResult');
+            box.style.display = 'block';
+            box.innerText = pass;
         }
     </script>
 </body>
