@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEYTRA | Gelişmiş Dönüştürücü & İndirici</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00c6ff;
+            --secondary: #0072ff;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        
+        body { background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
+        
+        /* Arka Plan Efektleri */
+        .bg-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 198, 255, 0.15) 0%, rgba(0,0,0,0) 70%); top: -200px; right: -100px; z-index: -1; border-radius: 50%; pointer-events: none; }
+        .bg-glow-2 { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 114, 255, 0.15) 0%, rgba(0,0,0,0) 70%); bottom: -100px; left: -200px; z-index: -1; border-radius: 50%; pointer-events: none; }
+
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo span { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-btn { padding: 10px 20px; background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .nav-btn:hover { box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4); transform: translateY(-2px); }
+
+        /* Hero Section */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 100px 8% 50px; gap: 50px; }
+        .hero-content { flex: 1; max-width: 600px; }
+        .hero-content h1 { font-size: 54px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .hero-content h1 span { background: linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-content p { font-size: 18px; color: var(--text-muted); margin-bottom: 35px; line-height: 1.6; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+        .stat-item h3 { font-size: 24px; color: var(--primary); }
+        .stat-item p { font-size: 14px; color: var(--text-muted); }
+
+        /* Tool Container (Right Side) */
+        .tool-wrapper { flex: 1; max-width: 550px; width: 100%; }
+        .container { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        
+        /* Tabs */
+        .tabs { display: flex; background: rgba(0,0,0,0.2); border-radius: 12px; pdding: 5px; margin-bottom: 30px; overflow: hidden; }
+        .tab-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); padding: 15px; cursor: pointer; font-size: 15px; font-weight: 600; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tab-btn.active { background: rgba(255,255,255,0.05); color: #fff; border-bottom: 2px solid var(--primary); }
+        
+        /* Content Areas */
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Inputs */
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .custom-input { width: 100%; padding: 16px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 15px; outline: none; transition: 0.3s; }
+        .custom-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.1); }
+        
+        /* Platforms */
+        .platform-select { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
+        .plat-btn { padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; color: var(--text-muted); transition: 0.3s; text-align: center; font-size: 18px; }
+        .plat-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .plat-btn.selected { border-color: var(--primary); color: var(--primary); background: rgba(0, 198, 255, 0.05); }
+        
+        /* Drop Zone */
+        .drop-zone { border: 2px dashed rgba(255,255,255,0.15); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 25px; background: rgba(15, 23, 42, 0.4); }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(0, 198, 255, 0.05); }
+        .drop-zone i { font-size: 48px; color: var(--primary); margin-bottom: 15px; }
+        
+        /* Action Button */
+        .action-btn { width: 100%; padding: 18px; border: none; border-radius: 12px; background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .action-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 114, 255, 0.3); }
+
+        /* Features Section */
+        .features { padding: 100px 8%; background: rgba(255,255,255,0.02); }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 60px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: rgba(30, 41, 59, 0.4); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .feature-card:hover { transform: translateY(-10px); border-color: rgba(0, 198, 255, 0.3); }
+        .feature-icon { width: 60px; height: 60px; background: rgba(0, 198, 255, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary); margin-bottom: 20px; }
+        .feature-card h3 { font-size: 20px; margin-bottom: 15px; }
+        .feature-card p { color: var(--text-muted); line-height: 1.6; font-size: 15px; }
+
+        /* Footer */
+        footer { padding: 40px 8%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; color: var(--text-muted); font-size: 14px; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 150px; }
+            .hero-stats { justify-content: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-layer-group" style="color: var(--primary)"></i> 
+            MEYTRA<span>Tools</span>
+        </a>
+        <div class="nav-links">
+            <a href="#home">Ana Sayfa</a>
+            <a href="#features">Özellikler</a>
+            <a href="#api">API Desteği</a>
+        </div>
+        <button class="nav-btn"><i class="fa-brands fa-github"></i> GitHub'da İncele</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Tüm Medyalarınızı <span>Tek Tıkla</span> Özgürleştirin.</h1>
+            <p>Instagram Reels, YouTube videoları veya formatını değiştirmek istediğiniz görseller... İhtiyacınız olan tüm araçlar tek bir platformda, ışık hızında ve tamamen güvenli.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h3>Sınırsız</h3>
+                    <p>Günlük Kullanım</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4K/HD</h3>
+                    <p>Maksimum Kalite</p>
+                </div>
+                <div class="stat-item">
+                    <h3>%100</h3>
+                    <p>Güvenli Altyapı</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- İşlem Aracı (Tool Container) -->
+        <div class="tool-wrapper">
+            <div class="container">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('social')">
+                        <i class="fa-solid fa-link"></i> Medya İndir
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('converter')">
+                        <i class="fa-solid fa-file-export"></i> Format Dönüştür
+                    </button>
+                </div>
+
+                <!-- İNDİRİCİ -->
+                <div id="social" class="tab-content active">
+                    <div class="input-group">
+                        <label>Video Bağlantısı</label>
+                        <input type="text" class="custom-input" placeholder="https://..." id="urlInput">
+                    </div>
+                    
+                    <div class="platform-select">
+                        <div class="plat-btn selected" title="Instagram"><i class="fa-brands fa-instagram"></i></div>
+                        <div class="plat-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></div>
+                        <div class="plat-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></div>
+                        <div class="plat-btn" title="Spotify"><i class="fa-brands fa-spotify"></i></div>
+                    </div>
+
+                    <button class="action-btn" onclick="startDownload()">
+                        <i class="fa-solid fa-bolt"></i> Sistemi Başlat
+                    </button>
+                </div>
+
+                <!-- DÖNÜŞTÜRÜCÜ -->
+                <div id="converter" class="tab-content">
+                    <div class="drop-zone" id="dropZone">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <h4 style="margin-bottom: 5px; color: #fff;">Dosya Seç veya Sürükle</h4>
+                        <p style="font-size: 13px; color: var(--text-muted);">PNG, JPG, WEBP, MP4, MP3 desteklenir.</p>
+                        <input type="file" id="fileInput" hidden>
+                    </div>
+
+                    <div style="display: flex; gap: 15px;">
+                        <div class="input-group" style="flex: 1;">
+                            <label>Hedef Format</label>
+                            <select class="custom-input" id="targetFormat">
+                                <option value="png">.PNG (Görsel)</option>
+                                <option value="jpg">.JPG (Görsel)</option>
+                                <option value="webp">.WEBP (Optimize)</option>
+                                <option value="mp3">.MP3 (Ses)</option>
+                                <option value="mp4">.MP4 (Video)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="action-btn" onclick="startConversion()">
+                        <i class="fa-solid fa-rotate"></i> Dönüştür ve İndir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Özellikler Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Neden MEYTRA Tools?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
+                <h3>Yüksek Hız</h3>
+                <p>Gelişmiş sunucu altyapımız veya tarayıcı tabanlı WASM teknolojimiz sayesinde dosyalarınız saniyeler içinde işlenir.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Gizlilik Odaklı</h3>
+                <p>Yüklediğiniz dosyalar dönüştürme işlemi bittikten hemen sonra sunuculardan kalıcı olarak silinir. Verileriniz güvende.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Kalite Kaybı Yok</h3>
+                <p>Görsellerinizi veya videolarınızı dönüştürürken sıkıştırma algoritmalarımız orijinal kaliteyi maksimum düzeyde korur.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 MEYTRA. Tüm hakları saklıdır. Geliştirici projeleri için Vercel & Netlify altyapısı ile tasarlanmıştır.</p>
+    </footer>
+
+    <script>
+        // Tab Geçişleri
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Platform Seçimi
+        document.querySelectorAll('.plat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.plat-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Dosya Seçme
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', function() {
+            if(this.files[0]) {
+                dropZone.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #00c6ff;"></i><h4 style="margin-top: 10px; color:#fff;">${this.files[0].name}</h4><p style="font-size: 13px; color: var(--text-muted);">Dosya Hazır</p>`;
+                dropZone.style.borderColor = '#00c6ff';
+            }
+        });
+
+        // Buton Animasyonları (Backend Simulasyonu)
+        function startDownload() {
+            const btn = document.querySelector('#social .action-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Medya Çekiliyor...`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> Başarıyla İndirildi!`;
+                btn.style.background = 'linear-gradient(45deg, #11998e, #38ef7d)';
+                setTimeout(() => { 
+                    btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Sistemi Başlat`; 
+                    btn.style.background = ''; 
+                }, 3000);
+            }, 2000);
+        }
+
+        function startConversion() {
+            if(!fileInput.files[0]) return alert("Lütfen önce bir dosya seç kanka!");
+            const btn = document.querySelector('#converter .action-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> İşleniyor...`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-solid fa-download"></i> Dosyayı Kaydet`;
+                btn.style.background = 'linear-gradient(45deg, #11998e, #38ef7d)';
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
