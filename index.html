@@ -210,11 +210,14 @@
                 const result = await response.json();
                 console.log("API Cevabı:", result);
 
+                // Tüm olasılıkları deneyip doğru medya dosyasını çekiyoruz
                 let dlUrl = "";
                 if (result.medias && result.medias.length > 0) {
                     dlUrl = result.medias[0].url;
                 } else if (result.video) {
                     dlUrl = result.video;
+                } else if (result.url && !result.url.includes('instagram.com')) {
+                    dlUrl = result.url;
                 } else if (result.link && !result.link.includes('instagram.com')) {
                     dlUrl = result.link;
                 }
