@@ -48,9 +48,7 @@
         .tab-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); padding: 15px; cursor: pointer; font-size: 15px; font-weight: 600; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .tab-btn.active { background: rgba(255,255,255,0.05); color: #fff; border-bottom: 2px solid var(--primary); }
         
-        .tab-content { display: none; animation: fadeIn 0.4s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content { display: block; }
 
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
@@ -127,7 +125,7 @@
                     <button class="tab-btn active"><i class="fa-solid fa-link"></i> Medya İndirici</button>
                 </div>
 
-                <div class="tab-content active">
+                <div class="tab-content">
                     <div class="input-group">
                         <label>Video Bağlantısı (URL)</label>
                         <input type="text" class="custom-input" placeholder="https://..." id="urlInput">
@@ -146,7 +144,7 @@
 
                     <div class="result-box" id="resultBox">
                         <p style="font-size: 14px; color: #fff;" id="videoTitle">Video Hazır!</p>
-                        <a id="downloadLink" href="#" target="_blank"><i class="fa-solid fa-download"></i> Dosyayı İndir</a>
+                        <a id="downloadLink" href="#" target="_blank" download><i class="fa-solid fa-download"></i> Dosyayı İndir</a>
                     </div>
                 </div>
             </div>
@@ -210,17 +208,24 @@
                 });
 
                 const result = await response.json();
-                console.log(result);
+                console.log("API Cevabı:", result);
 
-                // Yeni API'nin indirme linkini yakalama yapısı
-                if (result && (result.url || (result.medias && result.medias.length > 0))) {
-                    let dlUrl = result.url || result.medias[0].url;
+                let dlUrl = "";
+                if (result.medias && result.medias.length > 0) {
+                    dlUrl = result.medias[0].url;
+                } else if (result.video) {
+                    dlUrl = result.video;
+                } else if (result.link && !result.link.includes('instagram.com')) {
+                    dlUrl = result.link;
+                }
+
+                if (dlUrl) {
                     downloadLink.href = dlUrl;
                     videoTitle.innerText = result.title || "Video Başarıyla Hazırlandı!";
                     resultBox.style.display = 'block';
                     btn.innerHTML = `<i class="fa-solid fa-check"></i> Başarılı!`;
                 } else {
-                    alert("Video bulunamadı kanka, bağlantıyı kontrol et.");
+                    alert("Direkt video bağlantısı bulunamadı kanka!");
                     btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Videoyu İndir`;
                 }
 
