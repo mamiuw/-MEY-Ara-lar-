@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEYTRA Suite | Gelişmiş Web Araçları</title>
+    <title>Meytra Tools</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -70,10 +70,9 @@
     <header>
         <div class="nav-wrap">
             <div class="logo">
-                <i class="fa-solid fa-layer-group"></i> MEYTRA Suite
+                <i class="fa-solid fa-layer-group"></i> Meytra Tools
             </div>
             <ul class="nav-menu">
-                <!-- Sorgu Paneli Tarzı Üst Açılır Menüler -->
                 <li class="dropdown">
                     <button class="drop-btn"><i class="fa-solid fa-download"></i> İndirme İşlemleri <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></button>
                     <div class="dropdown-content">
@@ -191,11 +190,10 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 MEYTRA Suite. Tüm hakları saklıdır.</p>
+        <p>&copy; 2026 Meytra Tools. Tüm hakları saklıdır.</p>
     </footer>
 
     <script>
-        // Medya İndirici Simülasyonu / API Entegrasyonu
         async function runDownload() {
             const url = document.getElementById('mediaUrl').value.trim();
             const resBox = document.getElementById('mediaResult');
@@ -225,7 +223,6 @@
             }
         }
 
-        // Görsel Dönüştürücü
         function runConvert() {
             const fileInput = document.getElementById('imageFile');
             const resBox = document.getElementById('convertResult');
@@ -254,7 +251,6 @@
             reader.readAsDataURL(file);
         }
 
-        // UUID Üretici
         function runUuid() {
             let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
                 let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -265,7 +261,6 @@
             box.innerText = uuid;
         }
 
-        // Şifre Üretici
         function runPass() {
             const len = parseInt(document.getElementById('passLen').value) || 16;
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&!";
